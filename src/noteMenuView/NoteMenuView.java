@@ -3,6 +3,7 @@ package noteMenuView;
 import controllers.DeleteNoteController;
 import controllers.NoteController;
 import controllers.NoteListController;
+import editNoteMenuView.EditNoteMenuView;
 import models.Note;
 import tools.Alert;
 
@@ -41,8 +42,7 @@ public class NoteMenuView {
 		
 		switch(choice) {
 		case "edit":
-			Alert.ftrNotYet();
-			// TODO: make file-edit feature
+			new EditNoteMenuView().editNoteMenu();
 			showNote(note, noteController, noteListController);
 			return;
 		case "delete":
