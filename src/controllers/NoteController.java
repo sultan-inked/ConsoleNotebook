@@ -21,22 +21,6 @@ public class NoteController {
 	}
 	
 	public int[] getNoteContent(String fileName) {
-//		String content = "";
-//		try(var bufferedReader = new BufferedReader(new FileReader("notes/" + fileName + ".TXT"))){
-//			String tempStr;
-//			do {
-//				tempStr = bufferedReader.readLine();
-//				if(tempStr != null)
-//					content += tempStr;
-//			}while(tempStr != null);
-//		}
-//		catch(FileNotFoundException exc) {
-//			System.out.println(" - File not found. " + exc);
-//		}
-//		catch(IOException exc) {
-//			System.out.println(" - Problem when closing a file. " + exc);
-//		}
-		
 		ArrayList<Integer> content = new ArrayList<>();
 		try(var dataInputStream = new DataInputStream(new FileInputStream("notes/" + fileName + ".TXT"))){
 			int tempInt;
