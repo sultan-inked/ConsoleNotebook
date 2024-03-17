@@ -6,7 +6,7 @@ public class Note {
 	
 	
 //	Constructors:
-	public Note(String fileName, String noteTitle, String data, String time) {
+	public Note(String fileName, String data, String time, String noteTitle) {
 		this.fileName = fileName;
 		this.noteTitle = noteTitle;
 		this.data = data;

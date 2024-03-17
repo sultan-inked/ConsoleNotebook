@@ -54,7 +54,7 @@ public class MainMenuView {
 		String choice = mainMenuAlerts.choiceNoteOrMvmnt(numberOfNotes, listLimit, pageNumber, mainMenuConditionController);
 		
 		if(choice.matches("[0-9]*") && !choice.equals("")) {
-			noteMenuView.showNote(notes[Integer.parseInt(choice) -1], noteController);
+			noteMenuView.showNote(notes[Integer.parseInt(choice) -1], noteController, noteListController);
 			mainMenu();
 			return;
 		}

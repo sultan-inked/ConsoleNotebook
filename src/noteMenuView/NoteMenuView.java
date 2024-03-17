@@ -1,6 +1,8 @@
 package noteMenuView;
 
+import controllers.DeleteNoteController;
 import controllers.NoteController;
+import controllers.NoteListController;
 import models.Note;
 import tools.Alert;
 
@@ -29,7 +31,7 @@ public class NoteMenuView {
 	}
 	
 //	Methods:
-	public void showNote(Note note, NoteController noteController) {
+	public void showNote(Note note, NoteController noteController, NoteListController noteListController) {
 		Alert.separator();
 		System.out.println(" - Note menu - ");
 		noteMenuAlerts.showNoteContent(note, noteController);
@@ -41,13 +43,16 @@ public class NoteMenuView {
 		case "edit":
 			Alert.ftrNotYet();
 			// TODO: make file-edit feature
-			showNote(note, noteController);
+			showNote(note, noteController, noteListController);
 			return;
 		case "delete":
-			Alert.ftrNotYet();
-			// TODO: make file-delete feature
-			showNote(note, noteController);
-			return;
+			if(noteMenuAlerts.areYouSure("Delete: " + note.getNoteTitle())) {
+				new DeleteNoteController().deleteNote(note, noteController, noteListController);
+				return;
+			}else {
+				showNote(note, noteController, noteListController);
+				return;
+			}
 		case "back":
 			return;
 		}

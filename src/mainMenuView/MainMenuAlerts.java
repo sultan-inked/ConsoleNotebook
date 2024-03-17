@@ -25,8 +25,8 @@ public class MainMenuAlerts {
 		
 		int counter = 0;
 		
-		String choice = "";
-		do{
+		String choice;
+		while(true){
 			choice = Cnsl.scanWrtHere();
 			
 			switch(choice) {
@@ -62,8 +62,7 @@ public class MainMenuAlerts {
 				System.out.println(" - Exceeding the number of attempts.");
 				return choice;
 			}
-		}while(!choice.equals(""));
-		return choice;
+		}
 	}
 	private void printEnterNmbrOrMvmnt(int numberOfChoices, int listLimit, 
 			MainMenuConditionController mainMenuConditionController) {

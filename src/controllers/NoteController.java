@@ -13,9 +13,14 @@ public class NoteController {
 	
 //	Constructors:
 	
+//	Getters:
+	public String getNoteInfoByStringReplaceSpaceOfNoteTitle(Note note) {
+		return note.getFileName() + " " + note.getData() + " " + note.getTime() + " " + note.getNoteTitle().replaceAll(" ", "_");
+	}
+	
 //	Methods:
 	public void showNoteDescription(Note note) {
-		System.out.println(note.getNoteTitle() + " " + note.getData() + " " + note.getTime());
+		System.out.println(note.getData() + " " + note.getTime() + " " + note.getNoteTitle());
 	}
 	
 	public int[] getNoteContent(String fileName) {
