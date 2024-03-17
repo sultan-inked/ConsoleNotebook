@@ -38,11 +38,21 @@ public class NoteListController {
 		fileNameIteration();
 		File file = new File("notes/" + fileNameNumber + ".TXT");
 		fileTemp.renameTo(file);
-		File newFile = new File("notes/" + fileNameNumber + ".TXT");
-		addFileInfoToNoteList(newFile);
+	}
+	private void fileNameIteration() {
+		try(var fileWriter = new FileWriter("notes/fileCounter.TXT")){
+			fileNameNumber++;
+			String str = fileNameNumber + "";
+			fileWriter.write(str);
+		}
+		catch(IOException exc) {
+			System.out.println(" - I-O exception: " + exc);
+		}
+		refreshFileNameNumber();
 	}
 
-	private void addFileInfoToNoteList(File file) {
+	public void addFileInfoToNoteList() {
+		var file = new File("notes/" + fileNameNumber + ".TXT");
 		String newFileInfo = getFileInfo(file) + "\r\n";
 		var fileTemp = new File("notes/temp.TXT");
 		var fileListOfNotes = new File("notes/ListOfNotes.TXT");
@@ -66,11 +76,9 @@ public class NoteListController {
 		fileListOfNotes.delete();
 		fileTemp.renameTo(fileListOfNotes);
 	}
-	
 	private String getFileInfo(File file) {
-		return fileNameNumber + " " + getCurrentDateTime() + " " + getTitleOfNote(file);
+		return fileNameNumber + " " + getCurrentDateTime() + " " + getTitleOfNote(file).replaceAll(" ", "_");
 	}
-	
 	private String getCurrentDateTime() {
 		var currentDateTime = LocalDateTime.now();
 		var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm:ss");
@@ -78,7 +86,6 @@ public class NoteListController {
 		
 		return formattedDateTime;
 	}
-	
 	private String getTitleOfNote(File file) {
 		String str = "";
 		try(var bufferedReader = new BufferedReader(new FileReader(file))){
@@ -94,18 +101,6 @@ public class NoteListController {
 		return str;
 	}
 	
-	private void fileNameIteration() {
-		try(var fileWriter = new FileWriter("notes/fileCounter.TXT")){
-			fileNameNumber++;
-			String str = fileNameNumber + "";
-			fileWriter.write(str);
-		}
-		catch(IOException exc) {
-			System.out.println(" - I-O exception: " + exc);
-		}
-		refreshFileNameNumber();
-	}
-	
 	private void refreshFileNameNumber() {
 		try(var bufferedReader = new BufferedReader(new FileReader("notes/fileCounter.TXT"))){
 			String str = bufferedReader.readLine();
@@ -115,8 +110,6 @@ public class NoteListController {
 			System.out.println(" - I-O exception: " + exc);
 		}
 	}
-	
-	
 	
 	public void refreshNotesList() {
 		String str = "";
@@ -138,16 +131,4 @@ public class NoteListController {
 			System.out.println(" - Problem when file closing. " + exc);
 		}
 	}
-	
-	/*
-1 14.03.2024 19:35:34 Kitchen_list
-3 13.03.2024 21:20:34 Movie
-4 10.03.2024 11:54:12 Books
-2 10.03.2024 09:12:54 To_do_list
-5 05.03.2024 20:42:21 English
-6 04.03.2024 13:34:32 Meth_lab
-9 02.03.2024 14:54:15 Barry_Alen
-7 27.02.2024 08:10:22 Members
-8 26.12.2023 21:47:11 New_Year
-	 */
 }
