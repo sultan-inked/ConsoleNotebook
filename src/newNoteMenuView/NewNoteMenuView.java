@@ -3,9 +3,6 @@ package newNoteMenuView;
 import tools.Alert;
 import tools.Cnsl;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import controllers.NoteListController;
 
 import java.io.IOException;

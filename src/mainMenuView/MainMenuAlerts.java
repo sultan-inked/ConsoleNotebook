@@ -1,12 +1,9 @@
 package mainMenuView;
 
-import java.util.Scanner;
-
 import controllers.MainMenuConditionController;
 import controllers.NoteController;
 import controllers.NoteListController;
 import models.Note;
-import tools.Alert;
 import tools.Cnsl;
 
 public class MainMenuAlerts {

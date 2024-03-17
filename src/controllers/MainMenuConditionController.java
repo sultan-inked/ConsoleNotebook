@@ -2,7 +2,7 @@ package controllers;
 
 public class MainMenuConditionController {
 //	Variables:
-	private static int pageNumber = 1, pageNumberLimit, listLimit = 15, numberOfNotes;
+	private static int pageNumber = 1, pageNumberLimit, listLimit = 5, numberOfNotes;
 	
 //	Constructors:
 	public MainMenuConditionController() {
@@ -25,17 +25,6 @@ public class MainMenuConditionController {
 	public int getNumberOfNotes() {
 		numberOfNotesRefresh();
 		return numberOfNotes;
-	}
-	
-//	Setters:
-	public void setNumberOfNotes(int numberOfNotes) {
-		if(numberOfNotes >= 0)
-			this.numberOfNotes = numberOfNotes;
-	}
-	
-	public void setListLimit(int listLimit) {
-		if(listLimit >= 0)
-			this.listLimit = listLimit;
 	}
 	
 //	Methods:
