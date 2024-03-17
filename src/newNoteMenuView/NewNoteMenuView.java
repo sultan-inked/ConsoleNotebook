@@ -39,7 +39,7 @@ public class NewNoteMenuView {
 				if(str.equals("note-save")){
 					file = saveNoteController.saveTemporaryNote(noteListController);
 					fileWriter.close();
-					saveNoteController.addFileInfoToNoteList(file, noteListController);
+					saveNoteController.addFileInfoToNoteList(file, noteListController, "");
 					return;
 				}
 				if(str.equals("note-remove")) {

@@ -3,6 +3,7 @@ package noteMenuView;
 import controllers.DeleteNoteController;
 import controllers.NoteController;
 import controllers.NoteListController;
+import controllers.SaveNoteController;
 import editNoteMenuView.EditNoteMenuView;
 import models.Note;
 import tools.Alert;
@@ -42,7 +43,7 @@ public class NoteMenuView {
 		
 		switch(choice) {
 		case "edit":
-			new EditNoteMenuView().editNoteMenu();
+			new EditNoteMenuView(note).editNoteMenu(note, noteListController);
 			showNote(note, noteController, noteListController);
 			return;
 		case "delete":

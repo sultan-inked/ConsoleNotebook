@@ -17,8 +17,10 @@ public class SaveNoteController {
 		return file;
 	}
 	
-	public void addFileInfoToNoteList(File file, NoteListController noteListController) {
-		String newFileInfo = getFileInfo(file, noteListController) + "\r\n";
+	public void addFileInfoToNoteList(File file, NoteListController noteListController, String fileName) {
+		String newFileInfo = fileName.equals("") ?
+				getFileInfo(file, noteListController) + "\r\n" :
+					getFileInfo(fileName, file, noteListController) + "\r\n";
 		var fileTemp = new File("notes/temp.TXT");
 		var fileListOfNotes = new File("notes/ListOfNotes.TXT");
 		
@@ -28,9 +30,13 @@ public class SaveNoteController {
 			String str;
 			do {
 				str = bufferedReader.readLine();
+				
 				if(str != null) {
-					str += "\r\n";
-					fileWriter.write(str);
+					String[] strAr = str.split(" ");
+					if(!strAr[0].equals(fileName)) {
+						str += "\r\n";
+						fileWriter.write(str);
+					}
 				}
 			}while(str != null);
 		}
@@ -44,6 +50,9 @@ public class SaveNoteController {
 	private String getFileInfo(File file, NoteListController noteListController) {
 		return noteListController.getFileNameNumber() + " " + getCurrentDateTime() + " " + getTitleOfNote(file).replaceAll(" ", "_");
 	}
+	private String getFileInfo(String fileName, File file, NoteListController noteListController) {
+		return fileName + " " + getCurrentDateTime() + " " + getTitleOfNote(file).replaceAll(" ", "_");
+	}
 	private String getCurrentDateTime() {
 		var currentDateTime = LocalDateTime.now();
 		var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm:ss");
@@ -55,14 +64,10 @@ public class SaveNoteController {
 		String str = "";
 		try(var bufferedReader = new BufferedReader(new FileReader(file))){
 			str = bufferedReader.readLine();
-			System.out.println(" *** " + file);
-			System.out.println(str);
-			
 		}
 		catch(IOException exc) {
 			System.out.println(" - I-O exception: " + exc);
 		}
-		System.out.println(str);
 		return str;
 	}
 }
