@@ -119,7 +119,7 @@ public class NoteListController {
 				str = bufferedReader.readLine();
 				if(str != null) {
 					String[] strAr = str.split(" ");
-					var note = new Note(strAr[0], strAr[1], strAr[2], strAr[3]);
+					var note = new Note(strAr[0], strAr[1], strAr[2], strAr[3].replaceAll("_", " "));
 					notesList.add(note);
 				}
 			}while(str != null);
