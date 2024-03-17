@@ -34,6 +34,7 @@ public class NoteMenuView {
 		System.out.println(" - Note menu - ");
 		noteMenuAlerts.showNoteContent(note, noteController);
 		
+		System.out.println("('edit'/'delete'/'back')");
 		String choice = noteMenuAlerts.noteMvmnt();
 		
 		switch(choice) {

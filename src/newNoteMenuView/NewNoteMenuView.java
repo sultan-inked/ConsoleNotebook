@@ -4,6 +4,7 @@ import tools.Alert;
 import tools.Cnsl;
 
 import controllers.NoteListController;
+import controllers.SaveNoteController;
 
 import java.io.IOException;
 import java.io.File;
@@ -21,6 +22,7 @@ public class NewNoteMenuView {
 	
 //	Methods:
 	public void newNoteMenu(NoteListController noteListController) {
+		var saveNoteController = new SaveNoteController();
 		Alert.separator();
 		System.out.println(" - New note - ");
 		System.out.println("('note-save'/'note-remove')");
@@ -35,9 +37,9 @@ public class NewNoteMenuView {
 				str = Cnsl.scan();
 				
 				if(str.equals("note-save")){
-					noteListController.saveTemporaryNote();
+					saveNoteController.saveTemporaryNote(noteListController);
 					fileWriter.close();
-					noteListController.addFileInfoToNoteList();
+					saveNoteController.addFileInfoToNoteList(noteListController);
 					return;
 				}
 				if(str.equals("note-remove")) {
