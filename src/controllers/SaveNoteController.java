@@ -9,15 +9,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class SaveNoteController {
-	public void saveTemporaryNote(NoteListController noteListController) {
+	public File saveTemporaryNote(NoteListController noteListController) {
 		File fileTemp = new File("notes/temp.TXT");
 		noteListController.fileNameIteration();
 		File file = new File("notes/" + noteListController.getFileNameNumber() + ".TXT");
 		fileTemp.renameTo(file);
+		return file;
 	}
 	
-	public void addFileInfoToNoteList(NoteListController noteListController) {
-		var file = new File("notes/" + noteListController.getFileNameNumber() + ".TXT");
+	public void addFileInfoToNoteList(File file, NoteListController noteListController) {
 		String newFileInfo = getFileInfo(file, noteListController) + "\r\n";
 		var fileTemp = new File("notes/temp.TXT");
 		var fileListOfNotes = new File("notes/ListOfNotes.TXT");

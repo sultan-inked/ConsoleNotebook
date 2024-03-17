@@ -37,9 +37,9 @@ public class NewNoteMenuView {
 				str = Cnsl.scan();
 				
 				if(str.equals("note-save")){
-					saveNoteController.saveTemporaryNote(noteListController);
+					file = saveNoteController.saveTemporaryNote(noteListController);
 					fileWriter.close();
-					saveNoteController.addFileInfoToNoteList(noteListController);
+					saveNoteController.addFileInfoToNoteList(file, noteListController);
 					return;
 				}
 				if(str.equals("note-remove")) {
