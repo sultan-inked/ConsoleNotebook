@@ -36,17 +36,17 @@ public class NewNoteMenuView {
 		System.out.print("Title of note");
 		
 		// create temporary file -
-		File file = new File("notes/temp.TXT");
+		File fileTemp = new File("notes/temp.TXT");
 		
 		// accepts the contents of a new note line by line -
-		try(var fileWriter = new FileWriter(file, true)){
+		try(var fileWriter = new FileWriter(fileTemp, true)){
 			String str;
 			do {
 				System.out.print(": ");
 				str = Cnsl.scan();
 				
 				if(str.equals("note-save")){
-					file = saveNoteController.saveTemporaryNoteFile(noteListController);
+					File file = saveNoteController.saveTemporaryNoteFile(fileTemp, noteListController);
 					
 					// close stream, otherwise will error with console input -
 					fileWriter.close();
@@ -55,7 +55,7 @@ public class NewNoteMenuView {
 					return;
 				}
 				if(str.equals("note-remove")) {
-					file.delete();
+					fileTemp.delete();
 					return;
 				}
 				

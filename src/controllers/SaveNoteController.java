@@ -20,9 +20,7 @@ public class SaveNoteController {
 	 * @param noteListController - to iterate the current file name number.
 	 * @return - returns the saved file with a new name
 	 */
-	public File saveTemporaryNoteFile(NoteListController noteListController) {
-		// TODO: add fileTemp to parameter of method
-		File fileTemp = new File("notes/temp.TXT");
+	public File saveTemporaryNoteFile(File fileTemp, NoteListController noteListController) {
 		noteListController.fileNameIteration();
 		File file = new File("notes/" + noteListController.getFileNameNumber() + ".TXT");
 		fileTemp.renameTo(file);
