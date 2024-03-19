@@ -3,27 +3,11 @@ package noteMenuView;
 import controllers.DeleteNoteController;
 import controllers.NoteController;
 import controllers.NoteListController;
-import controllers.SaveNoteController;
 import editNoteMenuView.EditNoteMenuView;
 import models.Note;
 import tools.Alert;
 
 public class NoteMenuView {
-	/*
-	 * Kitchen list
-	 * 
-	 * Bread
-	 * Apple
-	 * Banana
-	 * Potato
-	 * Oil
-	 * Water
-	 * Milk
-	 * Pickles
-	 * 
-	 * Write here: ('edit'/'delete'/'back')
-	 */
-	
 //	Variables:
 	private static NoteMenuAlerts noteMenuAlerts;
 	

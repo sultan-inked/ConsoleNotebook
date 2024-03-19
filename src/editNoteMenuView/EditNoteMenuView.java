@@ -3,22 +3,10 @@ package editNoteMenuView;
 import java.util.List;
 
 import controllers.NoteListController;
-import controllers.SaveNoteController;
 import models.Note;
 import tools.Alert;
 
 public class EditNoteMenuView {
-	/*
-	 *  - Edit note menu -
-	 *  t| Title of note: <text>
-	 *  1| <text>
-	 *  2| <text>
-	 *  3| <text>
-	 *  4| <text
-	 *  ('<string-number>-delete'/'<string-number>-edit'/'<string-number>-append'/
-	 *   'edit-save'/'edit-remove')
-	 *  Write here:
-	 */
 	
 //	Variables:
 	private final EditNoteMenuAlerts editNoteMenuAlerts;
@@ -37,8 +25,6 @@ public class EditNoteMenuView {
 		Alert.separator();
 		System.out.println(" - Edit note menu -");
 		
-		// TODO: recover next code line ↓†††
-//		List<String> noteContent = editNoteMenuAlerts.getNoteContentArrayList(note);
 		editNoteMenuAlerts.showNoteContentForEdit(note, noteContent);
 		
 		String canWrite = "('<string-number>-delete'/'<string-number>-edit'/'edit-save'/'edit-remove')";
@@ -61,7 +47,6 @@ public class EditNoteMenuView {
 			return;
 		case "save":
 			noteContentMove.save(note, noteContent, noteListController);
-//			editNoteMenu(note, noteListController);
 			return;
 		case "remove":
 			return;
