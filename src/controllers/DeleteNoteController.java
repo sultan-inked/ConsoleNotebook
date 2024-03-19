@@ -8,21 +8,46 @@ import java.io.IOException;
 
 import models.Note;
 
+/**
+ * The class responsible for deleting a note.
+ */
 public class DeleteNoteController {
+	/**
+	 * Performs a complete deletion of the specified note.
+	 * 
+	 * @param note - note to delete
+	 * @param noteController - for get note info
+	 * @param noteListController - to delete a note from the notes list
+	 */
 	public void deleteNote(Note note, NoteController noteController, NoteListController noteListController) {
 		deleteNoteInNoteList(note,noteController, noteListController);
 		deleteNoteFile(note);
 	}
 	
+	/**
+	 * Perform deletion of the note file from disk.
+	 * 
+	 * @param note - note to delete
+	 */
 	private void deleteNoteFile(Note note) {
 		var file = new File("notes/" + note.getFileName() + ".TXT");
 		file.delete();
 	}
 	
-	private void deleteNoteInNoteList(Note note, NoteController noteController, NoteListController noteListController) {
-		String fileInfo = noteController.getNoteInfoByStringReplaceSpaceOfNoteTitle(note);
+	/**
+	 * Perform deletion of a note from the list of notes in a file on disk.
+	 * 
+	 * @param note - note to delete
+	 * @param noteController - for get note info
+	 * @param noteListController - to delete a note from the notes list
+	 */
+	private void deleteNoteInNoteList(Note note, NoteController noteController,
+			NoteListController noteListController) {
 		
-		System.out.println(fileInfo);
+		// get note info as string
+		String fileInfo = noteController.getNoteInfoAsStringReplaceSpaceOfNoteTitle(note);
+		
+		System.out.println(fileInfo.replaceAll("_", " ") + " - note deleted.");
 		
 		var fileTemp = new File("notes/temp.TXT");
 		var fileListOfNotes = new File("notes/ListOfNotes.TXT");

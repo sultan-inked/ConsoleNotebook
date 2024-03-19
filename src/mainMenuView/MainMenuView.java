@@ -3,6 +3,7 @@ package mainMenuView;
 import controllers.MainMenuConditionController;
 import controllers.NoteController;
 import controllers.NoteListController;
+import controllers.SaveNoteController;
 import models.Note;
 import newNoteMenuView.NewNoteMenuView;
 import tools.Alert;
@@ -11,17 +12,16 @@ import noteMenuView.NoteMenuView;
 /**
  * The main menu of the program, which shows you
  * all the notes and will provide navigation.
- * Like next:
  * 
+ * Like next:
  * Simple console notebook
  * 1. 14.03.2024 19:35 Kitchen_list
  * 2. 13.03.2024 21:20 Movie
  * 3. 10.03.2024 11:54 Books
  * 4. 10.03.2024 09:12 To_do_list
  * - 1 of 3 - 
- * Write here: ('forward'/'backward'/'exit'/'new')
- * 
- * @author sultan
+ * ('forward'/'backward'/'exit'/'new')
+ * Write here:
  */
 public class MainMenuView {	
 //	Variables:
@@ -54,27 +54,30 @@ public class MainMenuView {
 	 * the data for displaying the list is obtained.
 	 */
 	public void mainMenu() {
+		// updating note information -
 		numberOfNotes = mainMenuConditionController.getNumberOfNotes();
 		listLimit = mainMenuConditionController.getListLimit();
 		pageNumber = mainMenuConditionController.getPageNumber();
 		pageNumberLimit = mainMenuConditionController.getPageNumberLimit();
-		
 		noteListController.refreshNotesList();
 		
+		// show main menu -
 		Alert.separator();
 		System.out.println("Simple console notebook");
 		mainMenuAlerts.showNotesList(numberOfNotes, listLimit, pageNumber, noteListController, noteController);
 		mainMenuAlerts.pageStatus(pageNumber, pageNumberLimit);
+		System.out.println("('forward'/'backward'/'exit'/'new')");
 		
+		// receiving a command from a user -
 		String choice = mainMenuAlerts.choiceNoteOrMvmnt(numberOfNotes, listLimit, pageNumber, mainMenuConditionController);
 		
+		// executing a user command -
 		if(choice.matches("[0-9]*") && !choice.equals("")) {
 			Note[] notes = noteListController.getNotesListArray();
 			noteMenuView.showNote(notes[Integer.parseInt(choice) -1], noteController, noteListController);
 			mainMenu();
 			return;
 		}
-		
 		switch(choice) {
 		case "forward":
 			mainMenuConditionController.pageNumberForward();
@@ -85,7 +88,7 @@ public class MainMenuView {
 			mainMenu();
 			return;
 		case "new":
-			new NewNoteMenuView().newNoteMenu(noteListController);
+			new NewNoteMenuView().newNoteMenu(noteListController, new SaveNoteController());
 			mainMenu();
 			return;
 		case "exit":

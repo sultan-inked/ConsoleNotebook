@@ -8,21 +8,40 @@ import java.io.FileInputStream;
 
 import models.Note;
 
+/**
+ * A class for interacting with instances of the Note.java class.
+ */
 public class NoteController {
-//	Variables:
-	
-//	Constructors:
-	
 //	Getters:
-	public String getNoteInfoByStringReplaceSpaceOfNoteTitle(Note note) {
-		return note.getFileName() + " " + note.getData() + " " + note.getTime() + " " + note.getNoteTitle().replaceAll(" ", "_");
+	/**
+	 * Get the note information as a string for the main menu, with
+	 * spaces in the note title replaced by underscores.
+	 * 
+	 * @param note - a note to gather information
+	 * @return - note information
+	 */
+	public String getNoteInfoAsStringReplaceSpaceOfNoteTitle(Note note) {
+		return note.getFileName() + " " + note.getDate() + " " + note.getTime() +
+				" " + note.getNoteTitle().replaceAll(" ", "_");
 	}
 	
 //	Methods:
+	/**
+	 * To print the description of a note in the notes list in the main menu.
+	 * 
+	 * @param note - a note for print description
+	 */
 	public void showNoteDescription(Note note) {
-		System.out.println(note.getData() + " " + note.getTime() + " " + note.getNoteTitle());
+		System.out.println(note.getDate() + " " + note.getTime() + " " + note.getNoteTitle());
 	}
 	
+	/**
+	 * Accepts the name of the note file and returns an array of integers
+	 * representing the contents of the note file.
+	 * 
+	 * @param fileName - name of the note file
+	 * @return an array of integers representing the contents
+	 */
 	public int[] getNoteContent(String fileName) {
 		ArrayList<Integer> content = new ArrayList<>();
 		try(var dataInputStream = new DataInputStream(new FileInputStream("notes/" + fileName + ".TXT"))){

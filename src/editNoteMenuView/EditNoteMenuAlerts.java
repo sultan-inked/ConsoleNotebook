@@ -9,7 +9,19 @@ import java.util.List;
 import models.Note;
 import tools.Cnsl;
 
+/**
+ * Helper class for EditNoteMenuView.java
+ * Printing note content, and accepts, check and return user commands.
+ */
 public class EditNoteMenuAlerts {
+//	Methods:
+	/**
+	 * Receives, validates and returns a user command.
+	 * 
+	 * @param noteContent - note content by List for print
+	 * @param canWrite - list of available commands
+	 * @return returns a two-entry user command
+	 */
 	public String[] editMvmnt(List<String> noteContent, String canWrite) {
 		while(true) {
 			String choice = Cnsl.scanWrtHere();
@@ -37,7 +49,12 @@ public class EditNoteMenuAlerts {
 		}
 	}
 	
-	public void showNoteContentForEdit(Note note, List<String> noteContent) {
+	/**
+	 * Formats the content of the note with each line labeled and print.
+	 * 
+	 * @param noteContent - note content for edit
+	 */
+	public void showNoteContentForEdit(List<String> noteContent) {
 		for(int i = 0; i < noteContent.size(); i++) {
 			if(i == 0)
 				System.out.println("t| " + noteContent.get(i));
@@ -46,6 +63,12 @@ public class EditNoteMenuAlerts {
 		}
 	}
 	
+	/**
+	 * Take note and return the contents of a note as a list.
+	 * 
+	 * @param note - note to retrieve the file name
+	 * @return - contents as a list
+	 */
 	public List<String> getNoteContentArrayList(Note note){
 		List<String> noteContent = new ArrayList<>();
 		try(var bufferedReader = new BufferedReader(new FileReader("notes/" + note.getFileName() + ".TXT"))){

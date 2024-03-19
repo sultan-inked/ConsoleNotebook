@@ -6,6 +6,18 @@ import controllers.NoteListController;
 import models.Note;
 import tools.Alert;
 
+/**
+ * Provides tools for editing a note.
+ * 
+ * Like next:
+ *  - Edit note menu -
+ *  t| < title-of-note >
+ *  1| < text- >
+ *  2| < text- >
+ *  3| < text- >
+ *  ('<-line>-delete'/'<-line>-edit'/'<-line>-append'/'edit-save'/'edit-remove')
+ *	Write here:
+ */
 public class EditNoteMenuView {
 	
 //	Variables:
@@ -14,6 +26,11 @@ public class EditNoteMenuView {
 	private List<String> noteContent;
 	
 //	Constructors:
+	/**
+	 * Edit note menu constructor
+	 * 
+	 * @param note - accepts a note for provide to EditNoteMenuAlerts.java
+	 */
 	public EditNoteMenuView(Note note) {
 		editNoteMenuAlerts = new EditNoteMenuAlerts();
 		noteContentMove = new NoteContentMove();
@@ -21,17 +38,27 @@ public class EditNoteMenuView {
 	}
 	
 //	Methods:
+	/**
+	 * Prints the content of the note, accepts command from the user
+	 * and passed them to executing classes.
+	 * 
+	 * @param note - accepts a note for editing
+	 * @param noteListController - for provide to NoteContentMove.java
+	 */
 	public void editNoteMenu(Note note, NoteListController noteListController) {
+		// show menu -
 		Alert.separator();
 		System.out.println(" - Edit note menu -");
 		
-		editNoteMenuAlerts.showNoteContentForEdit(note, noteContent);
-		
-		String canWrite = "('<string-number>-delete'/'<string-number>-edit'/'edit-save'/'edit-remove')";
+		// Show note content -
+		editNoteMenuAlerts.showNoteContentForEdit(noteContent);
+		String canWrite = "('<-line>-delete'/'<-line>-edit'/'<-line>-append'/'edit-save'/'edit-remove')";
 		System.out.println(canWrite);
 		
+		// receive a command from a user -
 		String[] choiceAr = editNoteMenuAlerts.editMvmnt(noteContent, canWrite);
 		
+		// executing a user command -
 		switch(choiceAr[1]) {
 		case "delete":
 			noteContentMove.delete(choiceAr[0], noteContent);
@@ -51,6 +78,5 @@ public class EditNoteMenuView {
 		case "remove":
 			return;
 		}
-		
 	}
 }

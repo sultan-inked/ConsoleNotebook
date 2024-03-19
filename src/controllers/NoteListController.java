@@ -9,31 +9,58 @@ import java.util.ArrayList;
 
 import models.Note;
 
+/**
+ * A class to manage a list of notes and files to store the list of notes.
+ */
 public class NoteListController {
 //	Variables:
 	private int fileNameNumber;
 	private ArrayList<Note> notesList = new ArrayList<>();
 	
 //	Constructors:
+	/**
+	 * Constructor of NoteListController.java without parameters.
+	 * When an instance of the class is created, the list with notes
+	 * and the variable with the file name counter are updated.
+	 */
 	public NoteListController() {
 		refreshNotesList();
 		refreshFileNameNumber();
 	}
 	
 //	Getters:
+	/**
+	 * Get current list of notes as array of notes.
+	 * 
+	 * @return - array of notes
+	 */
 	public Note[] getNotesListArray() {
 		return notesList.toArray(new Note[notesList.size()]);
 	}
 	
+	/**
+	 * Get number of notes.
+	 * 
+	 * @return - number of notes as int variable
+	 */
 	public int getNumberOfNotes() {
 		return notesList.size();
 	}
 	
+	/**
+	 * Get current value of the counter of the number of file names.
+	 * 
+	 * @return - number of file names
+	 */
 	public int getFileNameNumber() {
 		return fileNameNumber;
 	}
 	
 //	Methods:
+	/**
+	 * Iterate the number of file names and write the value to fileCounter.TXT file.
+	 * Updates the fileNameNumber value at the end of the method.
+	 */
 	public void fileNameIteration() {
 		try(var fileWriter = new FileWriter("notes/fileCounter.TXT")){
 			fileNameNumber++;
@@ -46,6 +73,10 @@ public class NoteListController {
 		refreshFileNameNumber();
 	}
 	
+	/**
+	 * Updates the value of the fileNameNumber variable with information
+	 * form the fileCounter.TXT file.
+	 */
 	private void refreshFileNameNumber() {
 		try(var bufferedReader = new BufferedReader(new FileReader("notes/fileCounter.TXT"))){
 			String str = bufferedReader.readLine();
@@ -56,6 +87,9 @@ public class NoteListController {
 		}
 	}
 	
+	/**
+	 * Update the contents of the notes list from file ListOfNotes.TXTss
+	 */
 	public void refreshNotesList() {
 		String str = "";
 		notesList.clear();
@@ -64,6 +98,7 @@ public class NoteListController {
 				str = bufferedReader.readLine();
 				if(str != null) {
 					String[] strAr = str.split(" ");
+					// create new instance of Note -
 					var note = new Note(strAr[0], strAr[1], strAr[2], strAr[3].replaceAll("_", " "));
 					notesList.add(note);
 				}

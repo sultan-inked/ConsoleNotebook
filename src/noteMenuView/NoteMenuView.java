@@ -7,24 +7,54 @@ import editNoteMenuView.EditNoteMenuView;
 import models.Note;
 import tools.Alert;
 
+/**
+ * A user interface for viewing and interacting with the selected note.
+ * 
+ * Like next:
+ *  - Note menu -
+ *  < title-of-note >
+ *  < text- >
+ *  < text- >
+ *  < text- >
+ *  
+ *  ('edit'/'delete'/'back')
+ *	Write here:
+ */
 public class NoteMenuView {
 //	Variables:
 	private static NoteMenuAlerts noteMenuAlerts;
 	
 //	Constructors:
+	/**
+	 * Constructor without parameters.
+	 * Creates an instance of the 'NoteMenuAlerts.java' helper class.
+	 */
 	public NoteMenuView() {
 		noteMenuAlerts = new NoteMenuAlerts();
 	}
 	
 //	Methods:
+	/**
+	 * Prints the content of the note, accepts command from the user
+	 * and passed them to executing classes.
+	 * 
+	 * @param note - user-selected note
+	 * @param noteController - to retrieve information about the note
+	 * @param noteListController - to change the note information in the list
+	 */
 	public void showNote(Note note, NoteController noteController, NoteListController noteListController) {
+		// show menu -
 		Alert.separator();
 		System.out.println(" - Note menu - ");
-		noteMenuAlerts.showNoteContent(note, noteController);
 		
+		// show note content -
+		noteMenuAlerts.showNoteContent(note, noteController);
 		System.out.println("('edit'/'delete'/'back')");
+		
+		// receive a command from a user -
 		String choice = noteMenuAlerts.noteMvmnt();
 		
+		// executing a user command -
 		switch(choice) {
 		case "edit":
 			new EditNoteMenuView(note).editNoteMenu(note, noteListController);
