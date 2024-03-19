@@ -12,16 +12,6 @@ import noteMenuView.NoteMenuView;
 /**
  * The main menu of the program, which shows you
  * all the notes and will provide navigation.
- * 
- * Like next:
- * Simple console notebook
- * 1. 14.03.2024 19:35 Kitchen_list
- * 2. 13.03.2024 21:20 Movie
- * 3. 10.03.2024 11:54 Books
- * 4. 10.03.2024 09:12 To_do_list
- * - 1 of 3 - 
- * ('forward'/'backward'/'exit'/'new')
- * Write here:
  */
 public class MainMenuView {	
 //	Variables:

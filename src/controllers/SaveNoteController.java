@@ -18,6 +18,7 @@ public class SaveNoteController {
 	 * Performs saving a temporary note file by renaming it.
 	 * 
 	 * @param noteListController - to iterate the current file name number.
+	 * @param fileTemp - temporary file
 	 * @return - returns the saved file with a new name
 	 */
 	public File saveTemporaryNoteFile(File fileTemp, NoteListController noteListController) {

@@ -9,16 +9,6 @@ import tools.Alert;
 
 /**
  * A user interface for viewing and interacting with the selected note.
- * 
- * Like next:
- *  - Note menu -
- *  < title-of-note >
- *  < text- >
- *  < text- >
- *  < text- >
- *  
- *  ('edit'/'delete'/'back')
- *	Write here:
  */
 public class NoteMenuView {
 //	Variables:

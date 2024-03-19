@@ -12,14 +12,6 @@ import java.io.FileWriter;
 
 /**
  * Provides an interface for creating a new note.
- * 
- * Like next:
- *  - New note -
- *  ('note-save'/'note-remove')
- *  Title of note: < title-of-note >
- *  : < text- >
- *  : < text- >
- *  : < text- >
  */
 public class NewNoteMenuView {
 //	Methods:

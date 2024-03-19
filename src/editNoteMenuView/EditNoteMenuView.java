@@ -8,15 +8,6 @@ import tools.Alert;
 
 /**
  * Provides tools for editing a note.
- * 
- * Like next:
- *  - Edit note menu -
- *  t| < title-of-note >
- *  1| < text- >
- *  2| < text- >
- *  3| < text- >
- *  ('<-line>-delete'/'<-line>-edit'/'<-line>-append'/'edit-save'/'edit-remove')
- *	Write here:
  */
 public class EditNoteMenuView {
 	
