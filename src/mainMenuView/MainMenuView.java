@@ -8,17 +8,22 @@ import newNoteMenuView.NewNoteMenuView;
 import tools.Alert;
 import noteMenuView.NoteMenuView;
 
-public class MainMenuView {
-	/*
-	 * Simple console notebook
-	 * 1. 14.03.2024 19:35 Kitchen_list
-	 * 2. 13.03.2024 21:20 Movie
-	 * 3. 10.03.2024 11:54 Books
-	 * 4. 10.03.2024 09:12 To_do_list
-	 * - 1 of 3 - 
-	 * Write here: ('forward'/'backward'/'exit'/'new'
-	 */
-	
+/**
+ * The main menu of the program, which shows you
+ * all the notes and will provide navigation.
+ * Like next:
+ * 
+ * Simple console notebook
+ * 1. 14.03.2024 19:35 Kitchen_list
+ * 2. 13.03.2024 21:20 Movie
+ * 3. 10.03.2024 11:54 Books
+ * 4. 10.03.2024 09:12 To_do_list
+ * - 1 of 3 - 
+ * Write here: ('forward'/'backward'/'exit'/'new')
+ * 
+ * @author sultan
+ */
+public class MainMenuView {	
 //	Variables:
 	private final MainMenuAlerts mainMenuAlerts;
 	private final NoteListController noteListController;
@@ -29,6 +34,10 @@ public class MainMenuView {
 	private int numberOfNotes, listLimit, pageNumber, pageNumberLimit;
 	
 //	Constructors:
+	/**
+	 * Constructor without parameters.
+	 * Creates instances of classes required for the main menu to work.
+	 */
 	public MainMenuView() {
 		mainMenuAlerts = new MainMenuAlerts();
 		noteListController = new NoteListController();
@@ -38,6 +47,12 @@ public class MainMenuView {
 	}
 	
 //	Methods:
+	/**
+	 * The method shows a list of all notes.
+	 * It accepts user commands via console.
+	 * At each new start the notes state is updated and
+	 * the data for displaying the list is obtained.
+	 */
 	public void mainMenu() {
 		numberOfNotes = mainMenuConditionController.getNumberOfNotes();
 		listLimit = mainMenuConditionController.getListLimit();

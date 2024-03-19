@@ -6,8 +6,23 @@ import controllers.NoteListController;
 import models.Note;
 import tools.Cnsl;
 
+/**
+ * Helper class for MainMenuView.java
+ * Displays a list of notes, and accepts and processes user commands.
+ */
 public class MainMenuAlerts {
 	
+	/**
+	 * Displays a list of notes based on the specified number at a time
+	 * and the current page of the list.
+	 * 
+	 * @param numberOfNotes - total numbers of notes
+	 * @param listLimit - number of displayed notes per page
+	 * @param pageNumber - current page of the notes list
+	 * @param noteListController - this class contains a list of notes
+	 * @param noteController - needed to call the 'showNoteDescription()' method
+	 * @return
+	 */
 	public Note[] showNotesList(int numberOfNotes, int listLimit, int pageNumber, 
 			NoteListController noteListController, NoteController noteController) {
 		Note[] notes = noteListController.getNotesListArray();
