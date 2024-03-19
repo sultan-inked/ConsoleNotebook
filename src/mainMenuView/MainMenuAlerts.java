@@ -23,7 +23,7 @@ public class MainMenuAlerts {
 	 * @param noteController - needed to call the 'showNoteDescription()' method
 	 * @return
 	 */
-	public Note[] showNotesList(int numberOfNotes, int listLimit, int pageNumber, 
+	public void showNotesList(int numberOfNotes, int listLimit, int pageNumber, 
 			NoteListController noteListController, NoteController noteController) {
 		Note[] notes = noteListController.getNotesListArray();
 		for(int i = (listLimit * pageNumber) - listLimit; i < listLimit * pageNumber; i++) {
@@ -32,7 +32,6 @@ public class MainMenuAlerts {
 				noteController.showNoteDescription(notes[i]);
 			}else break;
 		}
-		return notes;
 	}
 	
 	public String choiceNoteOrMvmnt(int numberOfNotes, int listLimit, int pageNumber,

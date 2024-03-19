@@ -63,12 +63,13 @@ public class MainMenuView {
 		
 		Alert.separator();
 		System.out.println("Simple console notebook");
-		Note[] notes = mainMenuAlerts.showNotesList(numberOfNotes, listLimit, pageNumber, noteListController, noteController);
+		mainMenuAlerts.showNotesList(numberOfNotes, listLimit, pageNumber, noteListController, noteController);
 		mainMenuAlerts.pageStatus(pageNumber, pageNumberLimit);
 		
 		String choice = mainMenuAlerts.choiceNoteOrMvmnt(numberOfNotes, listLimit, pageNumber, mainMenuConditionController);
 		
 		if(choice.matches("[0-9]*") && !choice.equals("")) {
+			Note[] notes = noteListController.getNotesListArray();
 			noteMenuView.showNote(notes[Integer.parseInt(choice) -1], noteController, noteListController);
 			mainMenu();
 			return;
