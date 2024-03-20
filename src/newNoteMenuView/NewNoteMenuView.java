@@ -54,7 +54,7 @@ public class NewNoteMenuView {
 				str += "\r\n"; // add new-line character
 				fileWriter.write(str);
 				
-			}while(!str.equals("note-save") | !str.equals("note-remove"));
+			}while(!str.equals("note-save") || !str.equals("note-remove"));
 		}
 		catch(IOException exc) {
 			System.out.println(" - I-O exception: " + exc);
