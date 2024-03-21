@@ -1,5 +1,6 @@
 package mainMenuView;
 
+import controllers.CheckFileController;
 import controllers.MainMenuConditionController;
 import controllers.NoteController;
 import controllers.NoteListController;
@@ -30,7 +31,7 @@ public class MainMenuView {
 	 */
 	public MainMenuView() {
 		mainMenuAlerts = new MainMenuAlerts();
-		noteListController = new NoteListController();
+		noteListController = new NoteListController(new CheckFileController());
 		noteController = new NoteController();
 		mainMenuConditionController = new MainMenuConditionController();
 		noteMenuView = new NoteMenuView();
@@ -45,11 +46,13 @@ public class MainMenuView {
 	 */
 	public void mainMenu() {
 		// updating note information -
-		numberOfNotes = mainMenuConditionController.getNumberOfNotes();
+		noteListController.refreshFileNameNumber();
+		noteListController.refreshNotesList();
+		numberOfNotes = mainMenuConditionController.getNumberOfNotes(noteListController);
 		listLimit = mainMenuConditionController.getListLimit();
 		pageNumber = mainMenuConditionController.getPageNumber();
 		pageNumberLimit = mainMenuConditionController.getPageNumberLimit();
-		noteListController.refreshNotesList();
+		
 		
 		// show main menu -
 		Alert.separator();
@@ -59,7 +62,8 @@ public class MainMenuView {
 		System.out.println("('forward'/'backward'/'exit'/'new')");
 		
 		// receiving a command from a user -
-		String choice = mainMenuAlerts.choiceNoteOrMvmnt(numberOfNotes, listLimit, pageNumber, mainMenuConditionController);
+		String choice = mainMenuAlerts.choiceNoteOrMvmnt(numberOfNotes, listLimit, pageNumber,
+				mainMenuConditionController, noteListController);
 		
 		// executing a user command -
 		if(choice.matches("[0-9]*") && !choice.equals("")) {

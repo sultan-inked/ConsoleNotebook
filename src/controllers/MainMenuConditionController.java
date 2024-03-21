@@ -42,15 +42,15 @@ public class MainMenuConditionController {
 	 * 
 	 * @return - number of notes
 	 */
-	public int getNumberOfNotes() {
-		numberOfNotesRefresh();
+	public int getNumberOfNotes(NoteListController noteListController) {
+		numberOfNotesRefresh(noteListController);
 		pageNumberLimitRefresh();
 		return numberOfNotes;
 	}
 	
 //	Methods:
-	private void numberOfNotesRefresh() {
-		numberOfNotes = new NoteListController().getNumberOfNotes();
+	private void numberOfNotesRefresh(NoteListController noteListController) {
+		numberOfNotes = noteListController.getNumberOfNotes();
 	}
 	private void pageNumberLimitRefresh() {
 		pageNumberLimit = (int)Math.ceil((double)numberOfNotes / (double)listLimit);
@@ -78,8 +78,8 @@ public class MainMenuConditionController {
 	 * 
 	 * @return - boolean value
 	 */
-	public boolean pageNumberForwardValidator() {
-		numberOfNotesRefresh();
+	public boolean pageNumberForwardValidator(NoteListController noteListController) {
+		numberOfNotesRefresh(noteListController);
 		return pageNumber < pageNumberLimit ? true : false;
 	}
 	

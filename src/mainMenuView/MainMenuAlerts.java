@@ -45,7 +45,8 @@ public class MainMenuAlerts {
 	 * @return - the correct user command
 	 */
 	public String choiceNoteOrMvmnt(int numberOfNotes, int listLimit, int pageNumber,
-			MainMenuConditionController mainMenuConditionController) {
+			MainMenuConditionController mainMenuConditionController,
+			NoteListController noteListController) {
 		
 		String choice;
 		while(true){
@@ -58,7 +59,7 @@ public class MainMenuAlerts {
 				return choice;
 			case "forward":
 				if(numberOfNotes > listLimit && 
-						mainMenuConditionController.pageNumberForwardValidator())
+						mainMenuConditionController.pageNumberForwardValidator(noteListController))
 					return choice;
 				else break;
 			case "backward":
@@ -74,10 +75,10 @@ public class MainMenuAlerts {
 						choiceInt <= numberOfNotes)
 					return choice;
 				else
-					printEnterNmbrOrMvmnt(numberOfNotes, listLimit, mainMenuConditionController);
+					printEnterNmbrOrMvmnt(numberOfNotes, listLimit, mainMenuConditionController, noteListController);
 			}
 			catch(NumberFormatException exc) {
-				printEnterNmbrOrMvmnt(numberOfNotes, listLimit, mainMenuConditionController);
+				printEnterNmbrOrMvmnt(numberOfNotes, listLimit, mainMenuConditionController, noteListController);
 			}
 		}
 	}
@@ -90,13 +91,14 @@ public class MainMenuAlerts {
 	 * @param mainMenuConditionController
 	 */
 	private void printEnterNmbrOrMvmnt(int numberOfNotes, int listLimit, 
-			MainMenuConditionController mainMenuConditionController) {
+			MainMenuConditionController mainMenuConditionController,
+			NoteListController noteListController) {
 		String a = " - Enter note number, ",
 				b = "'exit' or 'new'.";
-		if(numberOfNotes > listLimit && mainMenuConditionController.pageNumberForwardValidator() &&
+		if(numberOfNotes > listLimit && mainMenuConditionController.pageNumberForwardValidator(noteListController) &&
 				mainMenuConditionController.pageNumberBackwardValidator())
 			System.out.println(a + "'forward'/'backward', " + b);
-		else if(numberOfNotes > listLimit && mainMenuConditionController.pageNumberForwardValidator())
+		else if(numberOfNotes > listLimit && mainMenuConditionController.pageNumberForwardValidator(noteListController))
 			System.out.println(a + "'forward', " + b);
 		else if(numberOfNotes > listLimit && mainMenuConditionController.pageNumberBackwardValidator())
 			System.out.println(a + "'backward', " + b);

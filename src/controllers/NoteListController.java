@@ -17,13 +17,17 @@ public class NoteListController {
 	private int fileNameNumber;
 	private ArrayList<Note> notesList = new ArrayList<>();
 	
+	private String fileCounterStr = "notes/fileCounter.TXT";
+	private String ListOfNotesStr = "notes/ListOfNotes.TXT";
+	
 //	Constructors:
 	/**
 	 * Constructor of NoteListController.java without parameters.
 	 * When an instance of the class is created, the list with notes
 	 * and the variable with the file name counter are updated.
 	 */
-	public NoteListController() {
+	public NoteListController(CheckFileController checkFileController) {
+		checkFilesAndCreatIfExcept(checkFileController);
 		refreshNotesList();
 		refreshFileNameNumber();
 	}
@@ -58,11 +62,28 @@ public class NoteListController {
 	
 //	Methods:
 	/**
+	 * Check if there are files to store a list and iterates the name value of new files.
+	 * If not, they are created with default values.
+	 * 
+	 * @param checkFileController to check and create file
+	 */
+	public void checkFilesAndCreatIfExcept(CheckFileController checkFileController) {
+		
+		if(!checkFileController.checkFileToExists(ListOfNotesStr)) {
+			checkFileController.creatNewFile(ListOfNotesStr, null);
+		}
+		
+		if(!checkFileController.checkFileToExists(fileCounterStr)) {
+			checkFileController.creatNewFile(fileCounterStr, "0");
+		}
+	}
+	
+	/**
 	 * Iterate the number of file names and write the value to fileCounter.TXT file.
 	 * Updates the fileNameNumber value at the end of the method.
 	 */
 	public void fileNameIteration() {
-		try(var fileWriter = new FileWriter("notes/fileCounter.TXT")){
+		try(var fileWriter = new FileWriter(fileCounterStr)){
 			fileNameNumber++;
 			String str = fileNameNumber + "";
 			fileWriter.write(str);
@@ -80,8 +101,8 @@ public class NoteListController {
 	 * Updates the value of the fileNameNumber variable with information
 	 * form the fileCounter.TXT file.
 	 */
-	private void refreshFileNameNumber() {
-		try(var bufferedReader = new BufferedReader(new FileReader("notes/fileCounter.TXT"))){
+	public void refreshFileNameNumber() {
+		try(var bufferedReader = new BufferedReader(new FileReader(fileCounterStr))){
 			String str = bufferedReader.readLine();
 			fileNameNumber = Integer.parseInt(str);
 		}
@@ -99,7 +120,7 @@ public class NoteListController {
 	public void refreshNotesList() {
 		String str = "";
 		notesList.clear();
-		try(var bufferedReader = new BufferedReader(new FileReader("notes/ListOfNotes.TXT"))) {
+		try(var bufferedReader = new BufferedReader(new FileReader(ListOfNotesStr))) {
 			do {
 				str = bufferedReader.readLine();
 				if(str != null) {
