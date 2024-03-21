@@ -29,19 +29,19 @@ public class SaveNoteController {
 	}
 	
 	/**
-	 * Adds information about a new not to the notes list file.
-	 * If a new file is created, the file name variable should be left blank ("").
+	 * Adds information about a new note to the notes list file.
+	 * If a new file is created, the filename variable should be specified as null.
 	 * If the file is not new and has been edited, the current file name should be specified.
 	 * 
 	 * @param file - file to add
 	 * @param noteListController - for get file name number value for new file created
-	 * @param fileName - the current file name is specified, if the file is new and there is no name yet, it's left blank
+	 * @param fileName - the current file name is specified, if the file is new and there is no name yet, it's should be specified as null
 	 */
 	public void addFileInfoToNoteList(File file, NoteListController noteListController, String fileName) {
 		// check for fileName value and get new file info -
-		String newFileInfo = fileName.equals("") ?
+		String newFileInfo = fileName == null ?
 				getFileInfo(file, noteListController) + "\r\n" :
-					getFileInfo(fileName, file) + "\r\n";
+					getFileInfo(file, fileName) + "\r\n";
 		
 		var fileTemp = new File("notes/temp.TXT");
 		var fileListOfNotes = new File("notes/ListOfNotes.TXT");
@@ -86,7 +86,7 @@ public class SaveNoteController {
 	 * @param file - file to add
 	 * @return - get file new info as string
 	 */
-	private String getFileInfo(String fileName, File file) {
+	private String getFileInfo(File file, String fileName) {
 		return fileName + " " + getCurrentDateTime() + " " + getTitleOfNote(file).replaceAll(" ", "_");
 	}
 	/**
@@ -111,6 +111,7 @@ public class SaveNoteController {
 		String str = "";
 		try(var bufferedReader = new BufferedReader(new FileReader(file))){
 			str = bufferedReader.readLine();
+			if(str == null || str.equals("")) str = "Untitled note";
 		}
 		catch(IOException exc) {
 			System.out.println(" - I-O exception: " + exc);

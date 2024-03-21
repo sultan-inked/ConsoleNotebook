@@ -38,12 +38,12 @@ public class NewNoteMenuView {
 				str = Cnsl.scan();
 				
 				if(str.equals("note-save")){
-					File file = saveNoteController.saveTemporaryNoteFile(fileTemp, noteListController);
-					
 					// close stream, otherwise will error with console input -
 					fileWriter.close();
 					
-					saveNoteController.addFileInfoToNoteList(file, noteListController, "");
+					File file = saveNoteController.saveTemporaryNoteFile(fileTemp, noteListController);
+					
+					saveNoteController.addFileInfoToNoteList(file, noteListController, null);
 					return;
 				}
 				if(str.equals("note-remove")) {
