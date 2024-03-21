@@ -40,9 +40,9 @@ public class NoteMenuAlerts {
 	 * @param noteController - for taking the note content
 	 */
 	public void showNoteContent(Note note, NoteController noteController) {
-		int[] content = noteController.getNoteContent(note.getFileName());
-		for(int i : content) {
-			System.out.print((char)i);
+		String[] contentStr = noteController.getNoteContentAsStringArray(note.getFileName());
+		for(String str : contentStr) {
+			System.out.println(str);
 		}
 		System.out.println();
 	}

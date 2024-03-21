@@ -1,8 +1,10 @@
 package controllers;
 
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 
@@ -42,7 +44,7 @@ public class NoteController {
 	 * @param fileName - name of the note file
 	 * @return an array of integers representing the contents
 	 */
-	public int[] getNoteContent(String fileName) {
+	public int[] getNoteContentAsIntArray(String fileName) {
 		ArrayList<Integer> content = new ArrayList<>();
 		try(var dataInputStream = new DataInputStream(new FileInputStream("notes/" + fileName + ".TXT"))){
 			int tempInt;
@@ -59,5 +61,30 @@ public class NoteController {
 			System.out.println(" - Problem when closing a file. " + exc);
 		}
 		return content.stream().mapToInt(Integer::intValue).toArray();
+	}
+	
+	/**
+	 * Accept the name of the note file and returns an array of Strings
+	 * representing the content of the note file.
+	 * 
+	 * @param fileName
+	 * @return
+	 */
+	public String[] getNoteContentAsStringArray(String fileName) {
+		ArrayList<String> content = new ArrayList<>();
+		try(var bufferedReader = new BufferedReader(new FileReader("notes/" + fileName + ".TXT"))){
+			String str;
+			do {
+				str = bufferedReader.readLine();
+				if(str != null) content.add(str);
+			}while(str != null);
+		}
+		catch(FileNotFoundException exc) {
+			System.out.println(" - File with the name: " + fileName + " is not found.");
+		}
+		catch(IOException exc) {
+			System.out.println(" - I-O exception: " + exc);
+		}
+		return content.toArray(new String[content.size()]);
 	}
 }
