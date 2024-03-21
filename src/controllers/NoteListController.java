@@ -67,6 +67,9 @@ public class NoteListController {
 			String str = fileNameNumber + "";
 			fileWriter.write(str);
 		}
+		catch(FileNotFoundException exc) {
+			System.out.println(" - File not found: " + exc);
+		}
 		catch(IOException exc) {
 			System.out.println(" - I-O exception: " + exc);
 		}
@@ -81,6 +84,9 @@ public class NoteListController {
 		try(var bufferedReader = new BufferedReader(new FileReader("notes/fileCounter.TXT"))){
 			String str = bufferedReader.readLine();
 			fileNameNumber = Integer.parseInt(str);
+		}
+		catch(FileNotFoundException exc) {
+			System.out.println(" - File not found: " + exc);
 		}
 		catch(IOException exc) {
 			System.out.println(" - I-O exception: " + exc);
@@ -105,7 +111,7 @@ public class NoteListController {
 			}while(str != null);
 		}
 		catch(FileNotFoundException exc) {
-			System.out.println(" - File not found. " + exc);
+			System.out.println(" - File not found: " + exc);
 		}
 		catch(IOException exc) {
 			System.out.println(" - Problem when file closing. " + exc);
