@@ -81,6 +81,11 @@ public class EditNoteMenuAlerts {
 		catch(IOException exc) {
 			System.out.println(" - EditNoteMenuAlerts.java :22 :" + exc);
 		}
+		
+		// Adds the default title of note if it's not specified
+		if(noteContent.size() == 0)
+			noteContent.add("Untitled note");
+		
 		return noteContent;
 	}
 }
